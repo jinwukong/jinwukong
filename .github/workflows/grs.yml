@@ -29,22 +29,6 @@ jobs:
           path: profile/stats-dark.svg
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Top languages (light)
-        uses: stats-organization/github-readme-stats-action@v2
-        with:
-          card: top-langs
-          options: username=jinwukong&layout=compact&langs_count=6&hide=jupyter%20notebook,html
-          path: profile/top-langs.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Top languages (dark)
-        uses: stats-organization/github-readme-stats-action@v2
-        with:
-          card: top-langs
-          options: username=jinwukong&layout=compact&langs_count=6&hide=jupyter%20notebook,html&theme=github_dark
-          path: profile/top-langs-dark.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Commit cards
         run: |
           git config user.name "github-actions[bot]"

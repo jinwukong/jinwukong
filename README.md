@@ -2,6 +2,17 @@
 
 I build LLM research agents for a quant fund's investment-research desk: the agent runtime, the tool layer, model routing across vendors, evaluation, and the operations behind it. Most of what I send upstream started as something that broke in that production stack.
 
+<p>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/jinwukong/jinwukong/main/profile/stats-dark.svg">
+    <img alt="GitHub stats" height="170" src="https://raw.githubusercontent.com/jinwukong/jinwukong/main/profile/stats.svg">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/jinwukong/jinwukong/main/profile/top-langs-dark.svg">
+    <img alt="Top languages" height="170" src="https://raw.githubusercontent.com/jinwukong/jinwukong/main/profile/top-langs.svg">
+  </picture>
+</p>
+
 ## Upstream changes that shipped
 
 | Project | Change | Where it came from |

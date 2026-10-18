@@ -9,7 +9,7 @@ I build LLM research agents for a quant fund's investment-research desk: the age
   </picture>
 </p>
 
-## Upstream changes that shipped
+## Merged upstream
 
 | Project | Change | Where it came from |
 |---|---|---|
@@ -17,13 +17,16 @@ I build LLM research agents for a quant fund's investment-research desk: the age
 | [SGLang #43067](https://github.com/sgl-project/sglang/pull/43067) | `--json-model-override-args` overriding `rope_scaling` no longer drops `rope_theta` under transformers v5, where the model kept generating fluent text with the wrong RoPE base (Llama-3.2-3B GSM8K had fallen 161 → 106). | Traced to the `rope_scaling` alias setter in transformers; fixed the merge in SGLang and proposed the root-cause fix upstream ([transformers #49515](https://github.com/huggingface/transformers/pull/49515)). |
 | [OGX #6745](https://github.com/ogx-ai/ogx/pull/6745) | MCP tool results: `resource_link`, `audio`, embedded resources, `structured_content` and `is_error` now reach the model instead of raising or vanishing. | Reading the MCP result path while evaluating OGX (formerly Llama Stack) as an agent backend. |
 | [OGX #6776](https://github.com/ogx-ai/ogx/pull/6776) | A first-class `remote::sglang` inference provider: health, model classification, streaming reasoning passthrough, `/v1/rerank`, Anthropic Messages, plus the CI plumbing to run SGLang's CPU build in their integration tests. | The SGLang servers I operate; measured on hosted runners that SGLang's CPU kernels need AVX-512/AMX, which shaped how the CI lane is gated. |
+| [OGX #6782](https://github.com/ogx-ai/ogx/pull/6782) | SystemOne judgments through the SGLang provider, preserving usage and handling declared backend extensions before strict response validation. | A live SGLang response carried `x_label_mass`, which the shared wire model rejected. Fixed the boundary and verified the adapter against a running CPU server. |
 | [Homebrew #316024](https://github.com/Homebrew/homebrew-core/pull/316024) | New formula `android-file-transfer-linux`: the native `aft-mtp-cli` MTP client with its shared library. | Needed a native MTP CLI on Apple Silicon; the one bundled elsewhere ran under Rosetta. |
 | [android-file-transfer-linux #368](https://github.com/whoozle/android-file-transfer-linux/pull/368) | The macOS shared-library build links IOKit/CoreFoundation and installs with a working rpath. | Same need; the fix landed upstream first, then the formula. |
 
 ## In review
 
+- [OGX #6822](https://github.com/ogx-ai/ogx/pull/6822): Tev1 model discovery and recorded SGLang integration tests, with explicit CPU requirements for recording and replay on ordinary runners.
+- [LiteLLM #45044](https://github.com/BerriAI/litellm/pull/45044): preserve signed thinking replay data in streamed reasoning done items.
 - [vLLM #61205](https://github.com/vllm-project/vllm/pull/61205): bound consecutive whitespace in tool-call structural tags, the self-loop that let a model emit spaces until `max_tokens`.
-- [transformers #49515](https://github.com/huggingface/transformers/pull/49515): keep the RoPE base parameters when `rope_scaling` is set, the root cause behind SGLang #43067.
+- [transformers #49515](https://github.com/huggingface/transformers/pull/49515): deprecate `rope_scaling` assignment and normalize supplied RoPE parameters, following review of the override bug behind SGLang #43067.
 - [SGLang #42984](https://github.com/sgl-project/sglang/pull/42984), [#43119](https://github.com/sgl-project/sglang/pull/43119), [#43120](https://github.com/sgl-project/sglang/pull/43120): GLM-4.7/5.3 and Kimi-K3 tool-call grammars (always-thinking templates, free-text argument close markers, `additionalProperties`).
 
 ## Own projects
